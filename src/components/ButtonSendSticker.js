@@ -31,7 +31,7 @@ export function ButtonSendSticker(props) {
             justifyContent: 'center'            
         }}
         
-        iconName="FaStickyNote"   
+        iconName="FaRobot"   
         onClick={() => setOpenState(!isOpen)}
       />
       {/* A div dos stickers */}

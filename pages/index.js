@@ -46,7 +46,7 @@ export default function PaginaInicial() {
                 .catch(e => {       
                     // Se não encontrou o usuário ou a rede falhar seta o 'nome real' e a imagem como 404.                    
                     setUserImgURL("/assets/img/noUser.gif")
-                    setUserRealName("404")
+                    setUserRealName("4̸̡͉͉̈́̓̓0̸̞̙͙͛̀͛4̸͚̻͔̓̀")
                 })
         }
         else { // Nem procura no GH se o username tiver menos de 3 dígitos (apesar de que o GH aceita nomes de 1 dígito).
@@ -77,7 +77,8 @@ export default function PaginaInicial() {
                         },
                         width: '100%', maxWidth: '700px',
                         borderRadius: '5px', padding: '32px', margin: '16px',
-                        background: appConfig.theme.colors.neutrals[700].concat("99")
+                        background: appConfig.theme.colors.neutrals[700].concat("99"),
+                        boxShadow: "0px 0px 4px 2px #FD36B399"
                     }}
                 >
                     {/* Formulário, à esquerda em tela grande ou 100% em tela pequena. */}
@@ -92,7 +93,7 @@ export default function PaginaInicial() {
                             width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
                         }}
                     >
-                        <Titulo tag="p">Boas vindas de volta!</Titulo>
+                        <Titulo tag="p">Digite um nome...</Titulo>
                         <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[200] }}>
                             {appConfig.name.concat(" (por ")} 
                             <a href='/#' className='author' >bruno2077</a>)

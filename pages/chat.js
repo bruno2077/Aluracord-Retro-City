@@ -137,7 +137,7 @@ export default function ChatPage() {
                     display: 'flex',
                     flexDirection: 'column',
                     flex: 1,
-                    boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
+                    boxShadow: "0px 0px 4px 2px #FD36B377",
                     borderRadius: '5px',
                     backgroundColor: appConfig.theme.colors.neutrals[700],
                     height: '100%',
@@ -195,7 +195,7 @@ export default function ChatPage() {
                         />
                         <Button 
                             onClick={e => handleNewMessage(message)} 
-                            iconName="FaRegCaretSquareRight"                            
+                            iconName="FaPlay"                            
                             buttonColors={{
                                 contrastColor: appConfig.theme.colors.neutrals["000"],
                                 mainColor: appConfig.theme.colors.primary[700],
