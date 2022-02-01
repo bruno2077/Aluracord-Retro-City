@@ -1,8 +1,9 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components'; // componentes do Skynexui.
 import React from 'react';
 import { useRouter } from 'next/router';
-import appConfig from '../config.json'; // Arquivo com as paletas de cor, nome do app,
+import appConfig from '../config.json'; // Arquivo com as paletas de cor, nome do app, e os stickers.
 
+// Essa função só carrega o título e já define seu CSS na tag style. Foi mais pra fins didáticos.
 function Titulo(props) {
     const Tag = props.tag || 'p';
     return (
@@ -46,7 +47,7 @@ export default function PaginaInicial() {
                 .catch(e => {       
                     // Se não encontrou o usuário ou a rede falhar seta o 'nome real' e a imagem como 404.                    
                     setUserImgURL("/assets/img/noUser.gif")
-                    setUserRealName("4̸̡͉͉̈́̓̓0̸̞̙͙͛̀͛4̸͚̻͔̓̀")
+                    setUserRealName("4̸̡͉͉̈́̓̓0̸̞̙͙͛̀͛4̸͚̻͔̓̀") // 404
                 })
         }
         else { // Nem procura no GH se o username tiver menos de 3 dígitos (apesar de que o GH aceita nomes de 1 dígito).
@@ -72,7 +73,7 @@ export default function PaginaInicial() {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         flexDirection: {
-                            xs: 'column',
+                            xs: 'column-reverse',
                             sm: 'row',
                         },
                         width: '100%', maxWidth: '700px',
@@ -96,7 +97,7 @@ export default function PaginaInicial() {
                         <Titulo tag="p">Digite um nome...</Titulo>
                         <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[200] }}>
                             {appConfig.name.concat(" (por ")} 
-                            <a href='/#' className='author' >bruno2077</a>)
+                            <a href='https://github.com/bruno2077/aluracord-retro-city' className='author' >bruno2077</a>)
                         </Text>
 
                         <TextField

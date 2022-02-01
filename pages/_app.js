@@ -58,8 +58,7 @@ function GlobalStyle() {
     );
 }
   
-export default function CustomApp({ Component, pageProps }) {
-    console.log('Roda em todas as páginas!');
+export default function CustomApp({ Component, pageProps }) {    
     return (
         <>
             <GlobalStyle />

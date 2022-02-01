@@ -22,16 +22,6 @@ function listenMessagesRealTime(addMessage) {
         .subscribe();
 }
 
-function isValidSticker(stickerURL) {
-    
-    appConfig.stickers.forEach(el => {
-        if(el === stickerURL) {
-            // é um sticker válido.
-        }
-    })
-}
-
-
 export default function ChatPage() {
     const [message, setMessage] = React.useState('');
     const [messageList, setMessageList] = React.useState([]);    
@@ -47,7 +37,7 @@ export default function ChatPage() {
         .select("*")
         .order('id', { ascending: false })
         .then( res => {
-            setMessageList(res.data)
+            setMessageList(res.data);
         })
         .catch(err => console.log(err));
         
@@ -55,7 +45,6 @@ export default function ChatPage() {
         const subscription = listenMessagesRealTime((newMessage) => {
             // Passa uma função ao invés de valor para o setState pra pegar seu valor mais recente.
             setMessageList((CurrentValueOfList) => {
-                //console.log('valorAtualDaLista:', CurrentValueOfList);
                 return [
                     newMessage,
                     ...CurrentValueOfList,
@@ -76,7 +65,6 @@ export default function ChatPage() {
         // Se a mensagem é sticker garante que seja carregado um sticker válido.
         if(newMessage.startsWith(':sticker:')) {
             let stickerURL = newMessage.split(":sticker: ")[1]; // aqui vai ser undefined, "", inválido ou válido
-            console.log(stickerURL);
 
             // Cai aqui se a sintaxe estiver incorreta. Se digitou outra coisa ao invés de " " após :sticker:, 
             // se não digitou nada após :sticker: ou se só digitou :sticker: mesmo. Em todo caso não manda nada pro servidor.
@@ -146,7 +134,7 @@ export default function ChatPage() {
                     padding: '32px',
                 }}
             >
-                <Header />
+                <Header user={username}/>
                 
                 <Box // Nessa div vem a lista de mensagens do chat e o form de envio de mensagens.
                     styleSheet={{
@@ -195,7 +183,8 @@ export default function ChatPage() {
                         />
                         <Button 
                             onClick={e => handleNewMessage(message)} 
-                            iconName="FaPlay"                            
+                            iconName="FaPlay"
+                            disabled={message ? false : true}
                             buttonColors={{
                                 contrastColor: appConfig.theme.colors.neutrals["000"],
                                 mainColor: appConfig.theme.colors.primary[700],
@@ -229,27 +218,33 @@ export default function ChatPage() {
 }
 
 // Essa função monta o cabeçalho do chat.
-function Header() {
+function Header(props) {
+    const userImg = props.user ? `https://github.com/${props.user}.png` : '/assets/img/noUser.gif'
     return (
         <>
             <Box styleSheet={{ width: '100%', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
                 <Text variant='heading5'>
                     Chat {appConfig.name}
                 </Text>
-                <Button
-                    variant='tertiary'
-                    label='Logout'
-                    href="/" // Apesar de ser 'Button' tem href e redireciona pro '/' mesmo.
-                    buttonColors={{                    
-                        mainColor: "#fff",
-                        mainColorLight: appConfig.theme.colors.primary[300],                        
-                    }}
-                    styleSheet={{
-                        hover: {
-                            backgroundColor: appConfig.theme.colors.primary[600],
-                        }
-                    }}
-                />
+                
+                <Box styleSheet={{display: 'flex'}}>
+                    <Image src={userImg} styleSheet={{width: '40px', borderRadius: '50%', marginRight: "5px" }}/>
+                    <Button
+                        variant='tertiary'
+                        label='Logout'
+                        href="/" // Apesar de ser 'Button' tem href embutido.
+                        buttonColors={{
+                            mainColor: "#fff",
+                            mainColorLight: appConfig.theme.colors.primary[300],                        
+                        }}
+                        styleSheet={{
+                            hover: {
+                                backgroundColor: appConfig.theme.colors.primary[600],
+                            }
+                        }}
+                    />
+                </Box>
+
             </Box>
         </>
     )
@@ -258,9 +253,6 @@ function Header() {
 // Essa função monta a lista de mensagens do chat ou um loading enquanto as mensagens não carregam.
 // Se não houver mensagem fica mostrando o loading... mudar isso depois.
 function MessageList(props) {
-    console.log('MessageList', props);
-
-
     const showLoading = props.messages.length ? "" : 
         <Image     
             styleSheet={{
@@ -270,7 +262,6 @@ function MessageList(props) {
             }}
             src={`/assets/img/loading4.gif`}                                
         />
-
 
     return (
         <Box

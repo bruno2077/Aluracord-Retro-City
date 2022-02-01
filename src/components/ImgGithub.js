@@ -8,28 +8,25 @@ export function ImgGithub(props) {
   const [userImgURL, setUserImgURL] = React.useState('')
   const [userRealName, setUserRealName] = React.useState('')
 
-if(isOpen) {
-  fetch(`https://api.github.com/users/${props.user}`)
-  .then( res => { 
-      if(res.status !== 200)
-          throw 'error' 
-      else return res.json() 
-  })
-  .then(json => {
-      // Ao carregar os dados atribui às variaveis.
-      setUserRealName(json.name)                    
-      setUserImgURL(json.avatar_url)
-      setContentLoaded(true)
-  })
-  .catch(e => {       
-      // Deixa vars vazias pra não aparecer nada.
-      setUserImgURL("/assets/img/noUser.gif")
-      setUserRealName("Usuário não encontrado no Github")
-  })
-}
-  
-
-
+  if(isOpen) {
+    fetch(`https://api.github.com/users/${props.user}`)
+    .then( res => { 
+        if(res.status !== 200)
+            throw 'error' 
+        else return res.json() 
+    })
+    .then(json => {
+        // Ao carregar os dados atribui às variaveis.
+        setUserRealName(json.name)                    
+        setUserImgURL(json.avatar_url)
+        setContentLoaded(true)
+    })
+    .catch(e => {       
+        // Deixa vars vazias pra não aparecer nada.
+        setUserImgURL("/assets/img/noUser.gif")
+        setUserRealName("Usuário não encontrado no Github")
+    })
+  }
 
   return (
     <Box
