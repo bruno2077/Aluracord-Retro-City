@@ -330,7 +330,7 @@ function MessageList(props) {
                                 }}
                                 tag="span"
                             >
-                                {(new Date().toLocaleDateString())} 
+                                {(new Date(message.created_at).toLocaleDateString())} 
                             </Text>
                         </Box>
                         {/* Se a mensagem começar com :sticker: é pra tratar como uma imagem. Espera-se uma URL após ':sticker:' pra renderizar. */}
